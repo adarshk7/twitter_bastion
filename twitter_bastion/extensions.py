@@ -24,7 +24,7 @@ class Neo4jConnection(object):
             return current_app
         if self.app is not None:
             return self.app
-        raise RuntimeError('No applicationr registered.')
+        raise RuntimeError('No application registered.')
 
     @property
     def graph(self, app=None):
