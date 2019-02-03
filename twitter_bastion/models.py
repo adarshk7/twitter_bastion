@@ -35,11 +35,3 @@ class Hashtag(GraphObject):
     value = Property()
 
     tagged_in = RelatedTo(Tweet)
-
-
-class User(GraphObject):
-    __primarykey__ = '__id__'
-
-    name = Property()
-    access_key_token = Property()
-    access_key_secret = Property()

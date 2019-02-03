@@ -23,3 +23,10 @@ ACCESS_TOKEN_SECRET = os.environ.get('ACCESS_TOKEN_SECRET')
 # Target hashtag
 
 TARGET_HASHTAG = os.environ['TARGET_HASHTAG']
+
+
+# Authentication/Flask-JWT settings
+
+SECRET_KEY = 'secret-key'
+JWT_AUTH_USERNAME_KEY = 'username'
+JWT_AUTH_PASSWORD_KEY = 'password'

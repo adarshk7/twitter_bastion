@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask
+from flask_jwt import JWT
 
 from .extensions import db, twitter
 
@@ -10,6 +11,7 @@ class Application(Flask):
         super(Application, self).__init__(__name__)
         self._init_settings()
         self._init_extensions()
+        self._init_authentication_hander()
 
     def _init_settings(self, environment=None):
         if environment is None:
@@ -20,6 +22,24 @@ class Application(Flask):
     def _init_extensions(self):
         db.init_app(self)
         twitter.init_app(self)
+
+    def _init_authentication_hander(self):
+        # For the sake of brevity, the authentication is based on a fake user.
+        class FakeUser(object):
+            id = 123
+            username = 'fakeuser'
+            password = 'fakepassword'
+        fakeuser = FakeUser()
+
+        def _authenticate(username, password):
+            if fakeuser.username == username and fakeuser.password == password:
+                return fakeuser
+
+        def _identity(payload):
+            return fakeuser
+
+        jwt = JWT(self, _authenticate, _identity)
+        jwt.init_app(self)
 
 
 app = Application()

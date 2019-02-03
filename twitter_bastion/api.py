@@ -1,4 +1,5 @@
 from flask import jsonify
+from flask_jwt import jwt_required
 
 from twitter_bastion import app
 from twitter_bastion.extensions import db
@@ -10,6 +11,7 @@ def root():
 
 
 @app.route('/hashtag_counts')
+@jwt_required()
 def hashtag_counts():
     return jsonify([
         {'hashtag': row['h']['value'], 'count': row['hashtag_count']}
