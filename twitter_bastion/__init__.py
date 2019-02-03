@@ -2,7 +2,7 @@ import os
 
 from flask import Flask
 
-from .extensions import db
+from .extensions import db, twitter
 
 
 class Application(Flask):
@@ -19,6 +19,7 @@ class Application(Flask):
 
     def _init_extensions(self):
         db.init_app(self)
+        twitter.init_app(self)
 
 
 app = Application()
