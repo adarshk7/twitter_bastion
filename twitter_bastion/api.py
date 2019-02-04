@@ -1,16 +1,22 @@
-from flask import jsonify
+from flask import Blueprint, jsonify
 from flask_jwt import jwt_required
 
-from twitter_bastion import app
 from twitter_bastion.extensions import db
 
 
-@app.route('/')
+api_blueprint = Blueprint(
+    name='api_blueprint',
+    url_prefix='',
+    import_name=__name__,
+)
+
+
+@api_blueprint.route('/')
 def root():
     return "Hello World!"
 
 
-@app.route('/hashtag_counts')
+@api_blueprint.route('/hashtag_counts')
 @jwt_required()
 def hashtag_counts():
     return jsonify([

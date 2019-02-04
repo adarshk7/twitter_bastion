@@ -12,6 +12,7 @@ class Application(Flask):
         self._init_settings()
         self._init_extensions()
         self._init_authentication_hander()
+        self._init_blueprints()
 
     def _init_settings(self, environment=None):
         if environment is None:
@@ -41,7 +42,9 @@ class Application(Flask):
         jwt = JWT(self, _authenticate, _identity)
         jwt.init_app(self)
 
+    def _init_blueprints(self):
+        from twitter_bastion.api import api_blueprint
+        self.register_blueprint(api_blueprint)
+
 
 app = Application()
-
-import twitter_bastion.api  # noqa
