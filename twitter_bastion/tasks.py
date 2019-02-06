@@ -5,19 +5,11 @@ from flask import current_app
 from sentry_sdk import capture_message
 
 from twitter_bastion.celery import celery_app
-from twitter_bastion.extensions import db, twitter
+from twitter_bastion.extensions import db
 from twitter_bastion.models import Tweet
 from twitter_bastion.services import (
-    add_tweet_and_related_data,
     get_tweet_count_percent_difference_for_subsequent_time_windows,
 )
-
-
-@celery_app.task
-def stream_twitter_data():
-    target_hashtag = current_app.config['TARGET_HASHTAG']
-    for tweet_data in twitter.api.GetStreamFilter(track=[target_hashtag]):
-        add_tweet_and_related_data(tweet_data)
 
 
 @celery_app.task
