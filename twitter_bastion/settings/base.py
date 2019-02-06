@@ -30,3 +30,8 @@ TARGET_HASHTAG = os.environ['TARGET_HASHTAG']
 SECRET_KEY = 'secret-key'
 JWT_AUTH_USERNAME_KEY = 'username'
 JWT_AUTH_PASSWORD_KEY = 'password'
+
+
+# Sentry settings
+
+SENTRY_DSN = os.environ.get('SENTRY_DSN')

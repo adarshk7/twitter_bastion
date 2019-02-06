@@ -1,5 +1,6 @@
 import os
 
+import sentry_sdk
 from flask import Flask
 from flask_jwt import JWT
 
@@ -13,6 +14,7 @@ class Application(Flask):
         self._init_extensions()
         self._init_authentication_hander()
         self._init_blueprints()
+        self._init_sentry()
 
     def _init_settings(self, environment=None):
         if environment is None:
@@ -45,6 +47,11 @@ class Application(Flask):
     def _init_blueprints(self):
         from twitter_bastion.api import api_blueprint
         self.register_blueprint(api_blueprint)
+
+    def _init_sentry(self):
+        sentry_dsn = self.config.get('SENTRY_DSN')
+        if sentry_dsn:
+            sentry_sdk.init(sentry_dsn)
 
 
 app = Application()

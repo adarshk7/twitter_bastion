@@ -4,3 +4,5 @@ python-twitter==3.5
 celery==4.2.1
 Flask-JWT==0.3.2
 PyJWT==1.4.2
+sentry-sdk==0.7.1
+ipython==6.5.0
