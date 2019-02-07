@@ -23,9 +23,9 @@ def hashtag_counts():
         {'hashtag': row['h']['value'], 'count': row['hashtag_count']}
         for row in db.graph.run(
             'MATCH (t:Tweet)<-[:TAGGED_IN]-(h:Hashtag) '
-            'RETURN h, count(t) AS hashtag_count '
             'WHERE NOT t:Archived '
-            'ORDER BY hashtag_count '
-            'DESC LIMIT 5'
+            'RETURN h, count(t) AS hashtag_count '
+            'ORDER BY hashtag_count DESC '
+            'LIMIT 5'
         )
     ]), 200

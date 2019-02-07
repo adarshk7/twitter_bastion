@@ -23,6 +23,7 @@ class TestAPIHashtagCounts():
     def cypher_query(self):
         return (
             'MATCH (t:Tweet)<-[:TAGGED_IN]-(h:Hashtag) '
+            'WHERE NOT t:Archived '
             'RETURN h, count(t) AS hashtag_count '
             'ORDER BY hashtag_count DESC LIMIT 5'
         )
